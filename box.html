@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>VueJS Box</title>
+        <style>
+            .box {
+                background-color: black;
+                height: 200px;
+                width: 200px;
+            }
+        </style>
+    </head>
+    <body>
+        <script type="importmap">
+            {
+              "imports": {
+                "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+              }
+            }
+        </script>
+          
+        <div id="app">
+            <button @click="toggleBox">Toggle Box</button>
+            <test-box v-if="isVisible"></test-box>
+        </div>
+          
+        <script type="module">
+            import { createApp } from 'vue'
+            let app = createApp({
+                data() {
+                    return {
+                        isVisible: false
+                    }
+                },
+                methods: {
+                    toggleBox() {
+                        this.isVisible = !this.isVisible
+                    }
+                }
+            })
+            app.component('test-box', {
+                template: `
+                    <div class="box"></div>
+                `
+            })
+            app.mount('#app')
+        </script>
+    </body>
+</html>
